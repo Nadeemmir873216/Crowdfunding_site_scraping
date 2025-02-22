@@ -33,9 +33,9 @@ def scraping_website_by_category(category_id, save_path='Scraped_Projects/succes
             'wearables': 341
         }
 
-    category_name = list(category_id_dict.keys())[list(category_id_dict.values()).index(category_id)]
+    # category_name = list(category_id_dict.keys())[list(category_id_dict.values()).index(category_id)]
 
-    print(f'\n\n{category_name}\n\n')
+    # print(f'\n\n{category_name}\n\n')
 
 
 
