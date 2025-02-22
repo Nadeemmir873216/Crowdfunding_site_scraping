@@ -5,7 +5,7 @@ import os
 html_save_path = 'FlaskManagerCheck'
 csv_save_path = 'FlaskManagerCheck'
 category_id = 52
-pages=1
+pages=2
 
 
 if not os.path.exists(html_save_path):
@@ -23,12 +23,15 @@ if not os.path.exists(csv_save_path):
 
 
 from flask import Flask, render_template
+from flask import request
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def hello_world():
+    if request.method == 'POST':
+        print(request.form['category_id'])
     return render_template('index.html')
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
     app.run(debug=True, port=5000)
