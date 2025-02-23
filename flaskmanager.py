@@ -30,8 +30,8 @@ def scrap():
         scrape_html(category_id, html_save_path, pages=pages)
         html_csv(html_save_path, category_id, csv_save_path)
         print('Scraping Done')
-        print('Category ID:', category_id)
-        print('Pages:', pages)
+        result = f'Scraping Done. Category ID: {category_id}, Pages: {pages}'
+        return render_template('index.html', result=result)
     return render_template('index.html')
 
 if __name__ == '__main__':
