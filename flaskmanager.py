@@ -21,17 +21,30 @@ from flask import request
 
 app = Flask(__name__)
 
+# @app.route('/', methods=['GET', 'POST'])
+# def scrap():
+#     if request.method == 'POST':
+#         global category_id,pages
+#         pages = int(request.form['pages'])
+#         category_id = int(request.form['category-id'])
+#         scrape_html(category_id, html_save_path, pages=pages)
+#         html_csv(html_save_path, category_id, csv_save_path)
+#         print('Scraping Done')
+#         result = f'Scraping Done. Category ID: {category_id}, Pages: {pages}'
+#         return render_template('index.html', result=result)
+#     return render_template('index.html')
+
 @app.route('/', methods=['GET', 'POST'])
 def scrap():
     if request.method == 'POST':
-        global category_id,pages
+        global category_id, pages
         pages = int(request.form['pages'])
         category_id = int(request.form['category-id'])
         scrape_html(category_id, html_save_path, pages=pages)
         html_csv(html_save_path, category_id, csv_save_path)
         print('Scraping Done')
         result = f'Scraping Done. Category ID: {category_id}, Pages: {pages}'
-        return render_template('index.html', result=result)
+        return result
     return render_template('index.html')
 
 if __name__ == '__main__':
