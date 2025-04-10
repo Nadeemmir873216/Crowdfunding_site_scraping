@@ -16,7 +16,7 @@ if not os.path.exists(csv_save_path):
 ### Complete Flask Code starts here
 
 
-from flask import Flask, render_template
+from flask import Flask, render_template , send_from_directory , jsonify
 from flask import request
 
 app = Flask(__name__)
@@ -33,6 +33,22 @@ app = Flask(__name__)
 #         result = f'Scraping Done. Category ID: {category_id}, Pages: {pages}'
 #         return render_template('index.html', result=result)
 #     return render_template('index.html')
+
+SCRAPED_DATA_FOLDER = 'ScrapedData'
+
+@app.route('/ScrapedData/')
+def list_files():
+    try:
+        # files = os.listdir(SCRAPED_DATA_FOLDER)
+        files = [f for f in os.listdir(SCRAPED_DATA_FOLDER) if f.endswith('.csv')]
+
+        return jsonify(files)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/ScrapedData/<path:filename>')
+def download_file(filename):
+    return send_from_directory(SCRAPED_DATA_FOLDER, filename, as_attachment=True)
 
 @app.route('/', methods=['GET', 'POST'])
 def scrap():
